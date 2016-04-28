@@ -8,8 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class CameraActivity extends AppCompatActivity {
@@ -17,7 +17,7 @@ public class CameraActivity extends AppCompatActivity {
     private ImageView imageView;
     private TextView textView;
 
-    private static final int RADIUS = 1;
+    private static int radius = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,11 +61,15 @@ public class CameraActivity extends AppCompatActivity {
 
                 int pixelcount = 0;
                 int pixelsum = 0;
+
+                SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar);
+                radius = 1 + (int) ((double) bitmap.getHeight() * (double) seekBar.getProgress() / (double) seekBar.getMax() * 2);
+
                 for (int x = 0; x < bitmap.getWidth(); x++) {
                     for (int y = 0; y < bitmap.getHeight(); y++){
                         int xdist = realX - x;
                         int ydist = realY - y;
-                        if (Math.sqrt((xdist * xdist) + (ydist * ydist)) < RADIUS) {
+                        if (Math.sqrt((xdist * xdist) + (ydist * ydist)) < radius) {
                             pixelcount += 1;
                             pixelsum += bitmap.getPixel(x, y);
                         }
