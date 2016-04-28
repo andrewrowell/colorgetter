@@ -22,8 +22,17 @@
         android:layout_height="wrap_content"
         android:text="Take New Picture"
         android:id="@+id/button"
+        android:onClick="takePicture"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="takePicture"/>
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Select a Point"
+        android:id="@+id/textView"
+        android:layout_above="@+id/button"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
