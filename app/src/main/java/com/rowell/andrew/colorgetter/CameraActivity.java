@@ -17,6 +17,8 @@ public class CameraActivity extends AppCompatActivity {
     private ImageView imageView;
     private TextView textView;
 
+    private static final int RADIUS = 1;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +59,21 @@ public class CameraActivity extends AppCompatActivity {
             if (realX > 0 && realX < bitmap.getWidth()
                     && realY > 0 && realY < bitmap.getHeight()) {
 
-                int pixel = bitmap.getPixel(realX, realY);
+                int pixelcount = 0;
+                int pixelsum = 0;
+                for (int x = 0; x < bitmap.getWidth(); x++) {
+                    for (int y = 0; y < bitmap.getHeight(); y++){
+                        int xdist = realX - x;
+                        int ydist = realY - y;
+                        if (Math.sqrt((xdist * xdist) + (ydist * ydist)) < RADIUS) {
+                            pixelcount += 1;
+                            pixelsum += bitmap.getPixel(x, y);
+                        }
+
+                    }
+                }
+
+                int pixel = pixelsum / pixelcount;
                 int redValue = Color.red(pixel);
                 String red = Integer.toHexString(redValue).toUpperCase();
                 if (red.length() == 1) {
