@@ -59,9 +59,21 @@ public class CameraActivity extends AppCompatActivity {
 
                 int pixel = bitmap.getPixel(realX, realY);
                 int redValue = Color.red(pixel);
-                int blueValue = Color.blue(pixel);
+                String red = Integer.toHexString(redValue).toUpperCase();
+                if (red.length() == 1) {
+                    red = "0" + red;
+                }
                 int greenValue = Color.green(pixel);
-                this.textView.setText("(" + redValue + "," + blueValue + "," + greenValue + ")");
+                String green = Integer.toHexString(greenValue).toUpperCase();
+                if (green.length() == 1) {
+                    green = "0" + green;
+                }
+                int blueValue = Color.blue(pixel);
+                String blue = Integer.toHexString(blueValue).toUpperCase();
+                if (blue.length() == 1) {
+                    blue = "0" + blue;
+                }
+                this.textView.setText(red + green + blue);
             }
         }
         return super.onTouchEvent(event);
